@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "server"
+version = "0.1.0"
+description = "A website to manage employees within an organisation"
+authors = ["Abhishek Kashyap <abhik5567@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+django = "^5.1.2"
+python-dotenv = "^1.0.1"
+djangorestframework = "^3.15.2"
+django-cors-headers = "^4.5.0"
+djangorestframework-simplejwt = {extras = ["crypto"], version = "^5.3.1"}
+django-filter = "^24.3"
+django-silk = "^5.2.0"
+
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.6.9"
+pre-commit = "^4.0.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
