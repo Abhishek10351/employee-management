@@ -1,0 +1,7 @@
+repos:
+    - repo: local
+      hooks:
+          - id: prettier
+            language: node
+            name: prettier
+            entry: npx prettier * --write --tab-width=4 --ignore-path=./.next/* -u
