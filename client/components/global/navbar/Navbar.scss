@@ -1,0 +1,102 @@
+// styles/responsive.scss
+
+$mobile: 576px; // Mobile devices
+$tablet: 768px; // Tablet devices
+
+nav {
+    background-color: white;
+    position: relative; // Ensure the menu is positioned correctly
+
+    // Stack direction for mobile
+    @media (max-width: $mobile) {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    // Align items for tablet and larger
+    @media (min-width: $mobile) {
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+// Hamburger menu styles
+.hamburger {
+    display: none; // Hide hamburger by default
+    cursor: pointer;
+
+    @media (max-width: $mobile) {
+        display: block; // Show hamburger on mobile
+    }
+}
+
+// Responsive text styles
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-size: 1.5rem;
+
+    @media (max-width: $tablet) {
+        font-size: 1.25rem; // Slightly smaller on tablet
+    }
+
+    @media (max-width: $mobile) {
+        font-size: 1rem; // Even smaller on mobile
+    }
+}
+
+// Button styles
+.button {
+    border: none;
+    border-radius: 5px;
+
+    @media (max-width: $tablet) {
+        font-size: 0.9rem; // Smaller button text on tablet
+    }
+
+    @media (max-width: $mobile) {
+        font-size: 0.8rem; // Smaller button text on mobile
+    }
+}
+
+// Flex container styles
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+    @media (max-width: $tablet) {
+        flex-direction: column; // Stack items on tablet
+        align-items: center;
+    }
+
+    @media (max-width: $mobile) {
+        padding: 1rem; // Adjust padding for mobile
+    }
+}
+
+// Mobile menu styles
+$mobile: 576px; // Mobile devices
+
+.mobile-menu {
+    display: none; // Hidden by default
+    flex-direction: column;
+    background-color: white;
+    width: 100%;
+    position: absolute;
+    top: 60px; // Adjust based on your navbar height
+    left: 100px;
+    z-index: 10; // Ensures the menu is on top of other content
+    padding: 1rem;
+
+    @media (max-width: $mobile) {
+        display: flex; // Show mobile menu only on smaller screens
+    }
+
+    &.open {
+        display: flex;
+    }
+}
