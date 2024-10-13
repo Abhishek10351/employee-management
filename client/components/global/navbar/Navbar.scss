@@ -4,7 +4,7 @@ $mobile: 576px; // Mobile devices
 $tablet: 768px; // Tablet devices
 
 nav {
-    background-color: white;
+    display: flex;
     position: relative; // Ensure the menu is positioned correctly
 
     // Stack direction for mobile

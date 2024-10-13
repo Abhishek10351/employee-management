@@ -35,6 +35,7 @@ export default function Navbar() {
             fontFamily="var(--font-heading)"
             p={4}
             position="relative"
+            display={"list-item"}
         >
             <Flex
                 align="center"
