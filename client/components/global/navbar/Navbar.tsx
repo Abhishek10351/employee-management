@@ -3,12 +3,12 @@
 import { Box, Flex, Text, Button, Stack, IconButton } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons"; // Import icons
-import "./Navbar.scss"; // Import your styles
+import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
+import "./Navbar.scss";
 
 export default function Navbar() {
     const router = useRouter();
-    const [isMenuOpen, setIsMenuOpen] = useState(false); // State for mobile menu
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     function handleLogin() {
         router.push("/login");
@@ -20,11 +20,11 @@ export default function Navbar() {
 
     function handleNavigateTo(path: string) {
         router.push(path);
-        setIsMenuOpen(false); // Close menu on navigation
+        setIsMenuOpen(false);
     }
 
     function toggleMenu() {
-        setIsMenuOpen(!isMenuOpen); // Toggle the mobile menu
+        setIsMenuOpen(!isMenuOpen);
     }
 
     return (
@@ -35,6 +35,7 @@ export default function Navbar() {
             fontFamily="var(--font-heading)"
             p={4}
             position="relative"
+            display={"list-item"}
         >
             <Flex
                 align="center"
@@ -46,20 +47,15 @@ export default function Navbar() {
                     Orbit
                 </Text>
 
-                {/* Hamburger icon only visible on mobile */}
                 <IconButton
                     icon={isMenuOpen ? <CloseIcon /> : <HamburgerIcon />}
                     aria-label="Toggle Navigation"
                     variant="outline"
                     onClick={toggleMenu}
-                    display={{ base: "block", md: "none" }} // Show only on mobile
+                    display={{ base: "block", md: "none" }}
                 />
 
-                {/* Desktop Navbar Items */}
-                <Flex
-                    align="center"
-                    display={{ base: "none", md: "flex" }} // Hidden on mobile
-                >
+                <Flex align="center" display={{ base: "none", md: "flex" }}>
                     <Stack
                         direction="row"
                         spacing={10}
@@ -105,7 +101,6 @@ export default function Navbar() {
                 </Flex>
             </Flex>
 
-            {/* Mobile Menu */}
             {isMenuOpen && (
                 <Flex
                     className="mobile-menu"
@@ -121,8 +116,8 @@ export default function Navbar() {
                     bg="var(--menu-color)"
                     borderRadius={10}
                     p={7}
-                    zIndex={100} // Ensure it appears above other content
-                    display={{ base: "flex", md: "none" }} // Visible only on
+                    zIndex={100}
+                    display={{ base: "flex", md: "none" }}
                 >
                     <Text
                         cursor="pointer"
