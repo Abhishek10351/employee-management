@@ -1,0 +1,36 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --primary-color: #00ff9c;
+    --secondary-color: #b6ffa1;
+    --accent-color: #ffe700;
+    --background-color: #feffa773;
+    --text-color: #1f2323;
+    --font-primary: "Poppins", sans-serif;
+    --font-secondary: "Open Sans", sans-serif;
+    --font-heading: "Manrope", sans-serif;;
+    --font-mono: "Fira Code", monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background: #0a0a0a;
+        --foreground: #ededed;
+    }
+}
+
+body {
+    color: var(--text-color);
+    background: var(--background-color);
+    font-family: var(--font-primary);
+}
+
+@layer utilities {
+    .text-balance {
+        text-wrap: balance;
+    }
+}
