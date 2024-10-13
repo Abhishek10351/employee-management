@@ -1,36 +1,30 @@
-// styles/responsive.scss
-
-$mobile: 576px; // Mobile devices
-$tablet: 768px; // Tablet devices
+$mobile: 576px;
+$tablet: 768px;
 
 nav {
     display: flex;
-    position: relative; // Ensure the menu is positioned correctly
+    position: relative;
 
-    // Stack direction for mobile
     @media (max-width: $mobile) {
         flex-direction: column;
         align-items: center;
     }
 
-    // Align items for tablet and larger
     @media (min-width: $mobile) {
         display: flex;
         justify-content: space-between;
     }
 }
 
-// Hamburger menu styles
 .hamburger {
-    display: none; // Hide hamburger by default
+    display: none;
     cursor: pointer;
 
     @media (max-width: $mobile) {
-        display: block; // Show hamburger on mobile
+        display: block;
     }
 }
 
-// Responsive text styles
 h1,
 h2,
 h3,
@@ -40,60 +34,57 @@ h6 {
     font-size: 1.5rem;
 
     @media (max-width: $tablet) {
-        font-size: 1.25rem; // Slightly smaller on tablet
+        font-size: 1.25rem;
     }
 
     @media (max-width: $mobile) {
-        font-size: 1rem; // Even smaller on mobile
+        font-size: 1rem;
     }
 }
 
-// Button styles
 .button {
     border: none;
     border-radius: 5px;
 
     @media (max-width: $tablet) {
-        font-size: 0.9rem; // Smaller button text on tablet
+        font-size: 0.9rem;
     }
 
     @media (max-width: $mobile) {
-        font-size: 0.8rem; // Smaller button text on mobile
+        font-size: 0.8rem;
     }
 }
 
-// Flex container styles
 .flex-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
 
     @media (max-width: $tablet) {
-        flex-direction: column; // Stack items on tablet
+        flex-direction: column;
         align-items: center;
     }
 
     @media (max-width: $mobile) {
-        padding: 1rem; // Adjust padding for mobile
+        padding: 1rem;
     }
 }
 
-// Mobile menu styles
-$mobile: 576px; // Mobile devices
+$mobile: 576px;
 
 .mobile-menu {
-    display: none; // Hidden by default
+    display: none;
     flex-direction: column;
     background-color: white;
     width: 100%;
     position: absolute;
-    top: 60px; // Adjust based on your navbar height
+    top: 60px;
     left: 100px;
-    z-index: 10; // Ensures the menu is on top of other content
+    z-index: 10;
     padding: 1rem;
 
     @media (max-width: $mobile) {
-        display: flex; // Show mobile menu only on smaller screens
+        display: flex;
     }
 
     &.open {
