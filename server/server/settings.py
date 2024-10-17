@@ -29,7 +29,13 @@ SECRET_KEY = "django-insecure-reqhg7%c1#cb6j#9w)4!*yc!nr7^f&sj#lr$ka4a^4p@mq@h67
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+
+# CSRF COOKIES
+CSRF_TRUSTED_ORIGINS = ["http://localhost*", "http://127.0.0.1*"]
+
+# CORS
+CORS_ALLOW_CREDENTIALS = True
 
 
 # Application definition
@@ -145,6 +151,7 @@ REST_FRAMEWORK = {
         "rest_framework.authentication.SessionAuthentication",
     ],
 }
+
 
 # JWT settings
 SIMPLE_JWT = {

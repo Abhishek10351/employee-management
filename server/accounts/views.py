@@ -17,10 +17,9 @@ class CreateUserView(generics.CreateAPIView):
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid():
-            self.perform_create(serializer)
             data = serializer.data
-
-            return JsonResponse(data, status=201)
+            user = User.objects.create_user(**data)
+            return JsonResponse(user, status=201)
         return JsonResponse(serializer.errors, status=400)
 
 
@@ -34,6 +33,13 @@ class UserViewSet(viewsets.ModelViewSet):
             return User.objects.all()
         else:
             return User.objects.filter(id=self.request.user.id)
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        if serializer.is_valid():
+            user = User.objects.create_user(**serializer.validated_data)
+            return JsonResponse(UserSerializer(user).data, status=201)
+        return JsonResponse(serializer.errors, status=400)
 
 
 class UserView(generics.RetrieveAPIView):
