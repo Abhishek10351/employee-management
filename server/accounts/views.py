@@ -9,6 +9,7 @@ from rest_framework_simplejwt.views import (
 )
 from datetime import timedelta
 
+
 class CreateUserView(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
@@ -69,13 +70,11 @@ class CreateToken(TokenObtainPairView):
             key="refresh",
             value=response.data["refresh"],
             max_age=timedelta(days=5),
-            httponly=True,
         )
         response.set_cookie(
             key="access",
             value=response.data["access"],
             max_age=timedelta(weeks=6),
-            httponly=True,
         )
         response.data = {"message": "success"}
         return response
