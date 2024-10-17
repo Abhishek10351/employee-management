@@ -32,10 +32,29 @@ DEBUG = True
 ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 
 # CSRF COOKIES
-CSRF_TRUSTED_ORIGINS = ["http://localhost*", "http://127.0.0.1*"]
+# CSRF_TRUSTED_ORIGINS = ["http://localhost:3000", "http://127.0.0.1:3000", "http://*"]
 
 # CORS
+# fix cookie issue
+SESSION_COOKIE_SECURE = False
+CSRF_COOKIE_SECURE = False
+CORS_ORIGIN_ALLOW_ALL = True
+
+
 CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_METHODS = [
+    "GET",
+    "POST",
+    "PUT",
+    "PATCH",
+    "DELETE",
+]
+
+CORS_ALLOW_HEADERS = [
+    "Content-Type",
+    "Authorization",
+    "X-CSRFToken",
+]
 
 
 # Application definition
@@ -51,7 +70,8 @@ INSTALLED_APPS = [
     "rest_framework_simplejwt",
     "corsheaders",
     "silk",
-    "accounts",
+    "accounts.apps.AccountsConfig",
+
 ]
 
 MIDDLEWARE = [
@@ -62,6 +82,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "silk.middleware.SilkyMiddleware",
 ]
 

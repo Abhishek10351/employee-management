@@ -1,4 +1,4 @@
-import Login from "../../../sites/login/LoginPage";
+import Login from "../../../../sites/auth/login/LoginPage";
 
 const LoginPage = () => {
     return <Login />;
