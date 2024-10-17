@@ -1,7 +1,6 @@
-import Login from "../../../../sites/auth/login/LoginPage";
-
-const LoginPage = () => {
-    return <Login />;
+import LoginPage from "../../../../sites/auth/login/LoginPage";
+const Login = () => {
+    return <LoginPage />;
 };
 
-export default LoginPage;
+export default Login;
