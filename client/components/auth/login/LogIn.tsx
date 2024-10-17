@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-
+import { api } from "@/app/api";
 export default function Login() {
     const router = useRouter();
     const toast = useToast();
@@ -24,20 +24,20 @@ export default function Login() {
 
     function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
-
-        if (!email || !password) {
-            toast({
-                title: "Please fill all the fields.",
-                status: "warning",
-                duration: 3000,
-                isClosable: true,
+        const data = { username: email, password: password };
+        api.post("/accounts/token/", data)
+            .then((res) => {
+                router.push("/");
+            })
+            .catch((err) => {
+                toast({
+                    title: "Login failed.",
+                    description: "Please check your email and password.",
+                    status: "error",
+                    duration: 2000,
+                    isClosable: true,
+                });
             });
-
-            return;
-        }
-
-        console.log("Login Details:", { email, password });
-        router.push("/");
     }
 
     return (
@@ -65,7 +65,7 @@ export default function Login() {
                         <FormControl isRequired>
                             <FormLabel>Email</FormLabel>
                             <Input
-                                type="email"
+                                // type="email"
                                 placeholder="Enter your email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
