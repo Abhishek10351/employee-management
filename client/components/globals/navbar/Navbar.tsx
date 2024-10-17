@@ -11,7 +11,7 @@ export default function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     function handleLogin() {
-        router.push("/login");
+        router.push("/auth/login");
     }
 
     function handleSignUp() {
