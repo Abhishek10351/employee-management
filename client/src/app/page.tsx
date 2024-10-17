@@ -1,8 +1,6 @@
 // import Image from "next/image";
-import Homepage from "../../sites/home/Home";
+import { HomePage } from "../../sites";
 
 export default function Home() {
-  return (
-    <Homepage />
-  );
+    return <HomePage />;
 }

@@ -1,7 +1,7 @@
 import { Box, Heading, Text, Button } from "@chakra-ui/react";
 import { Navbar } from "../../components/globals";
 import { div } from "framer-motion/client";
-export default function Home() {
+export default function HomePage() {
     return (
         <div>
             <Navbar />
