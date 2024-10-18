@@ -71,7 +71,7 @@ INSTALLED_APPS = [
     "corsheaders",
     "silk",
     "accounts.apps.AccountsConfig",
-
+    "departments.apps.DepartmentsConfig",
 ]
 
 MIDDLEWARE = [
