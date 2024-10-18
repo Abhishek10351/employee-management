@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from .models import User
 from django.http import JsonResponse
 from rest_framework import viewsets, routers, generics
 from rest_framework.permissions import IsAuthenticated, AllowAny
@@ -27,9 +27,11 @@ class CreateUserView(generics.CreateAPIView):
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    permission_classes = [AllowAny]
     # permission_classes = [IsAuthenticated]
 
     def get_queryset(self, *args, **kwargs):
+        return User.objects.all()
         if self.request.user.is_staff:
             return User.objects.all()
         else:
