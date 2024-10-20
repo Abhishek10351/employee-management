@@ -24,7 +24,7 @@ export default function Login() {
 
     function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
-        const data = { username: email, password: password };
+        const data = { email: email, password: password };
         api.post("/accounts/token/", data)
             .then((res) => {
                 router.push("/");
