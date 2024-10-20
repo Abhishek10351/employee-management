@@ -9,6 +9,9 @@ from rest_framework_simplejwt.views import (
 )
 from datetime import timedelta
 
+from rest_framework.pagination import PageNumberPagination
+from rest_framework.response import Response
+
 
 class CreateUserView(generics.CreateAPIView):
     queryset = User.objects.all()
@@ -20,8 +23,10 @@ class CreateUserView(generics.CreateAPIView):
         if serializer.is_valid():
             data = serializer.data
             user = User.objects.create_user(**data)
-            return JsonResponse(user, status=201)
-        return JsonResponse(serializer.errors, status=400)
+            headers = self.get_success_headers(serializer.data)
+            return Response(UserSerializer(user).data, status=201, headers=headers)
+
+        return Response(serializer.errors, status=400)
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -40,15 +45,18 @@ class UserViewSet(viewsets.ModelViewSet):
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid():
-            user = User.objects.create_user(**serializer.validated_data)
-            return JsonResponse(UserSerializer(user).data, status=201)
-        return JsonResponse(serializer.errors, status=400)
+            data = serializer.data
+            user = User.objects.create_user(**data)
+            headers = self.get_success_headers(serializer.data)
+            return Response(serializer.data, status=201, headers=headers)
+        return Response(serializer.errors, status=400)
 
 
 class UserView(generics.RetrieveAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [IsAuthenticated]
+    pagination_class = PageNumberPagination
 
     def get_queryset(self, *args, **kwargs):
         return UserSerializer(self.request.user).data
@@ -87,7 +95,6 @@ class RefreshToken(TokenRefreshView):
 
     def post(self, request, *args, **kwargs):
 
-        # set cookies instead of returning json
         response = super().post(request, *args, **kwargs)
         response.set_cookie(
             key="access",
