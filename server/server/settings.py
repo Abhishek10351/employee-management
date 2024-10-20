@@ -57,6 +57,7 @@ CORS_ALLOW_HEADERS = [
 ]
 
 
+AUTH_USER_MODEL = "accounts.User"
 # Application definition
 
 INSTALLED_APPS = [
@@ -72,6 +73,7 @@ INSTALLED_APPS = [
     "silk",
     "accounts.apps.AccountsConfig",
     "departments.apps.DepartmentsConfig",
+    "employee.apps.EmployeeConfig",
 ]
 
 MIDDLEWARE = [
