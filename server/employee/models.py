@@ -10,7 +10,6 @@ def validate_hire_date(value):
 
 
 class Employee(models.Model):
-    # emp_id = models.AutoField(primary_key=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
     name = models.CharField(max_length=100)
     email = models.EmailField(unique=True)
@@ -23,14 +22,3 @@ class Employee(models.Model):
 
     def __str__(self):
         return f"{self.name} - {self.department} - {self.position}"
-
-
-example_positions = [
-    "Manager",
-    "Software Engineer",
-    "Chief Technology Officer",
-    "Chief Executive Officer",
-    "Chief Financial Officer",
-    # Add more positions here
-    " ",
-]
