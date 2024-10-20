@@ -1,13 +1,17 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-import  employee.models as emp_models
+
+
+# class Role(models.Model):
+#     name = models.CharField(max_length=255, unique=True)
+
+#     def __str__(self):
+#         return self.name
 
 
 class User(AbstractUser):
+    # role = models.ForeignKey(Role, on_delete=models.CASCADE, null=True, blank=True)
     email = models.EmailField(unique=True)
-    employee = models.OneToOneField(
-        emp_models.Employee, on_delete=models.CASCADE, related_name="user", null=True, blank=True
-    )
 
     EMAIL_FIELD = "email"
     USERNAME_FIELD = "email"

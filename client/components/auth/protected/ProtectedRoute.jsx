@@ -20,7 +20,7 @@ function ProtectedRoute({ children }) {
             return;
         }
         try {
-            const res = await api.post("/accounts/auth/refresh/", {
+            const res = await api.post("/accounts/refresh/", {
                 refresh: refresh,
             });
             if (res.status === 200) {
@@ -66,7 +66,7 @@ function ProtectedRoute({ children }) {
 
     return isAuthorized ? children : <div>user not logged in</div>;
 
-    // return isAuthorized ? children : <Navigate to="/login" />;
+    // return isAuthorized ? children : <Navigate to="/auth/login" />;
 }
 
 export default ProtectedRoute;
