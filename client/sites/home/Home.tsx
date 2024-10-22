@@ -1,5 +1,6 @@
 import { Box, Heading, Text, Button } from "@chakra-ui/react";
 import { Navbar } from "../../components/globals";
+import { Footer } from "../../components/globals";
 import { EmployeeTable } from "../../components/employees";
 export default function HomePage() {
     return (
@@ -29,6 +30,7 @@ export default function HomePage() {
                 </Button>
             </Box>
             <EmployeeTable />
+            <Footer />
         </div>
     );
 }
