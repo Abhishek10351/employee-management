@@ -1,6 +1,6 @@
 import { Box, Heading, Text, Button } from "@chakra-ui/react";
 import { Navbar } from "../../components/globals";
-import { div } from "framer-motion/client";
+import { EmployeeTable } from "../../components/employees";
 export default function HomePage() {
     return (
         <div>
@@ -22,12 +22,13 @@ export default function HomePage() {
                     Your HR Management Tool
                 </Text>
                 <Button
-                    colorScheme="whiteAlpha"
+                    colorScheme="blackAlpha"
                     // onClick={handleButtonClick}
                 >
                     Learn More
                 </Button>
             </Box>
+            <EmployeeTable />
         </div>
     );
 }
