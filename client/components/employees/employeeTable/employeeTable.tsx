@@ -1,13 +1,13 @@
 "use client";
+import { api } from "@/app/api";
+import { useEffect, useState } from "react";
 import { Table, Thead, Tbody, Tr, Th, Td } from "@chakra-ui/react";
-import { Employee} from "../../../types/employee";
+// import { Employee } from "../../../types/employee";
 import { EmployeePaginator, EmployeeRow } from "../.";
 
-import { ButtonGroup, Button } from "@chakra-ui/react";
-
 export default function EmployeeTable() {
-    // create an array of employees
-    const employees = [
+    const [page, setPage] = useState(1);
+    const [employees, setEmployees] = useState([
         {
             id: 1,
             name: "John Doe",
@@ -32,10 +32,24 @@ export default function EmployeeTable() {
             department: "Management",
             salary: 3000,
         },
-    ];
+    ]);
+    const showEmployees = async () => {
+        api.get("employees/")
+            .then((res) => {
+                const { data } = res;
+                setEmployees(data.results);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
+    useEffect(() => {
+        showEmployees();
+    }, []);
+
     return (
         <>
-            <Table variant="striped" colorScheme="cyan">
+            <Table variant="striped" colorScheme="teal">
                 <Thead>
                     <Tr>
                         <Th>Employee ID</Th>
@@ -48,9 +62,20 @@ export default function EmployeeTable() {
                     </Tr>
                 </Thead>
                 <Tbody>
-                    {employees.map((employee) => (
-                        <EmployeeRow key={employee.id} employee={employee} />
-                    ))}
+                    {employees.length > 0 ? (
+                        employees.map((employee) => (
+                            <EmployeeRow
+                                key={employee.id}
+                                employee={employee}
+                            />
+                        ))
+                    ) : (
+                        <Tr>
+                            <Td colSpan={7} textAlign={"center"}>
+                                No available employees
+                            </Td>
+                        </Tr>
+                    )}
                 </Tbody>
             </Table>
             <EmployeePaginator />
