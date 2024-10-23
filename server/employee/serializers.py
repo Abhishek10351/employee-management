@@ -7,7 +7,7 @@ class EmployeeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Employee
         # fields = '__all__'
-        fields = ["name", "email", "department", "position", "salary", "hire_date"]
+        fields = ["id","name", "email", "department", "position", "salary", "hire_date"]
         read_only_fields = ["user"]
     
     def create(self, validated_data):
