@@ -8,7 +8,6 @@ import {
     Input,
     Button,
     VStack,
-    Textarea,
     Select,
     useToast,
     HStack,
@@ -17,12 +16,13 @@ import {
 
 export default function Registration() {
     const [formData, setFormData] = useState({
-        firstName: "",
-        lastName: "",
+        name: "",
         email: "",
         phone: "",
         department: "",
-        address: "",
+        position: "",
+        salary: "",
+        hire_date: "",
     });
 
     const toast = useToast();
@@ -53,12 +53,13 @@ export default function Registration() {
 
     function handleClear() {
         setFormData({
-            firstName: "",
-            lastName: "",
+            name: "",
             email: "",
             phone: "",
             department: "",
-            address: "",
+            position: "",
+            salary: "",
+            hire_date: "",
         });
 
         toast({
@@ -86,25 +87,14 @@ export default function Registration() {
 
             <form onSubmit={handleSubmit}>
                 <VStack spacing={4}>
-                    <FormControl id="firstName" isRequired>
-                        <FormLabel>First Name</FormLabel>
+                    <FormControl id="name" isRequired>
+                        <FormLabel>Name</FormLabel>
                         <Input
                             type="text"
-                            name="firstName"
-                            value={formData.firstName}
+                            name="name"
+                            value={formData.name}
                             onChange={handleChange}
-                            placeholder="Enter first name"
-                        />
-                    </FormControl>
-
-                    <FormControl id="lastName" isRequired>
-                        <FormLabel>Last Name</FormLabel>
-                        <Input
-                            type="text"
-                            name="lastName"
-                            value={formData.lastName}
-                            onChange={handleChange}
-                            placeholder="Enter last name"
+                            placeholder="Enter name"
                         />
                     </FormControl>
 
@@ -142,16 +132,41 @@ export default function Registration() {
                             <option value="Engineering">Engineering</option>
                             <option value="Marketing">Marketing</option>
                             <option value="Finance">Finance</option>
+                            <option value="Sales">Sales</option>
                         </Select>
                     </FormControl>
 
-                    <FormControl id="address">
-                        <FormLabel>Address</FormLabel>
-                        <Textarea
-                            name="address"
-                            value={formData.address}
+                    <FormControl id="position" isRequired>
+                        <FormLabel>Position</FormLabel>
+                        <Input
+                            type="text"
+                            name="position"
+                            value={formData.position}
                             onChange={handleChange}
-                            placeholder="Enter address"
+                            placeholder="Enter position"
+                        />
+                    </FormControl>
+
+                    <FormControl id="salary" isRequired>
+                        <FormLabel>Salary</FormLabel>
+                        <Input
+                            type="number"
+                            name="salary"
+                            value={formData.salary}
+                            onChange={handleChange}
+                            placeholder="Enter salary"
+                            step="0.01"
+                        />
+                    </FormControl>
+
+                    <FormControl id="hire_date" isRequired>
+                        <FormLabel>Hire Date</FormLabel>
+                        <Input
+                            type="date"
+                            name="hire_date"
+                            value={formData.hire_date}
+                            onChange={handleChange}
+                            placeholder="Select hire date"
                         />
                     </FormControl>
 
