@@ -37,8 +37,7 @@ export default function Footer() {
 
             <VStack mt={4} spacing={0}>
                 <Text fontSize="sm">
-                    © {new Date().getFullYear()} Your Company. All rights
-                    reserved.
+                    © {new Date().getFullYear()} Orbit. All rights reserved.
                 </Text>
                 <Link href="/privacy-policy" fontSize="sm" color="teal.400">
                     Privacy Policy
