@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from departments.models import Department
 from accounts.models import User
+from django.core.exceptions import ValidationError
 
 
 def validate_hire_date(value):
@@ -10,15 +11,13 @@ def validate_hire_date(value):
 
 
 class Employee(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     name = models.CharField(max_length=100)
     email = models.EmailField(unique=True)
-    department = models.ForeignKey(Department, on_delete=models.CASCADE)
+    department = models.CharField(max_length=100)
     position = models.CharField(max_length=100)
-    salary = models.DecimalField(max_digits=10, decimal_places=2)
+    salary = models.IntegerField()
     hire_date = models.DateField(validators=[validate_hire_date])
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True, blank=True)
 
     def __str__(self):
-        return f"{self.name} - {self.department} - {self.position}"
+        return f"{self.name}, Department:  {self.department}, Position: {self.position}"
