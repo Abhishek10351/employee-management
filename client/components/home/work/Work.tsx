@@ -8,26 +8,34 @@ import {
     Flex,
     Container,
 } from "@chakra-ui/react";
-import { FaUser, FaChartLine, FaTasks } from "react-icons/fa"; // Icons from react-icons
+import { FaUser, FaChartLine, FaTasks } from "react-icons/fa";
 
 export default function HowItWorks() {
     return (
         <Box bg="var(--form-color)" py={16} color="black">
             <Container maxW="1200px">
-                {/* Main Heading */}
-                <Heading as="h2" size="2xl" textAlign="center" mb={8}>
+                <Heading
+                    as="h2"
+                    size="2xl"
+                    textAlign="center"
+                    mb={8}
+                    fontFamily="var(--font-primary)"
+                >
                     How it works
                 </Heading>
 
-                <Text textAlign="center" mb={12} fontSize="lg">
+                <Text
+                    textAlign="center"
+                    mb={12}
+                    fontSize="lg"
+                    fontFamily="var(--font-primary)"
+                >
                     Our HR management tool simplifies employee registration,
                     performance tracking, and task assignment, offering a
                     streamlined experience for HR departments and employees.
                 </Text>
 
-                {/* How It Works Cards */}
                 <Flex justify="space-around" wrap="wrap">
-                    {/* Register Employee */}
                     <VStack
                         bg="#004246"
                         color="white"
@@ -59,7 +67,6 @@ export default function HowItWorks() {
                         </Text>
                     </VStack>
 
-                    {/* Manage Employee Data */}
                     <VStack
                         bg="#004246"
                         color="white"
@@ -91,7 +98,6 @@ export default function HowItWorks() {
                         </Text>
                     </VStack>
 
-                    {/* Assign and Track Tasks */}
                     <VStack
                         bg="#004246"
                         color="white"

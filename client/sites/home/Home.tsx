@@ -3,6 +3,7 @@ import { Navbar } from "../../components/globals";
 import { Footer } from "../../components/globals";
 import { EmployeeTable } from "../../components/employees";
 import { Work } from "../../components/home";
+import { Faq } from "../../components/home";
 export default function HomePage() {
     return (
         <div>
@@ -31,8 +32,9 @@ export default function HomePage() {
                     Learn More
                 </Button>
             </Box>
-            {/* <EmployeeTable /> */}
+            <EmployeeTable />
             <Work />
+            <Faq />
             <Footer />
         </div>
     );

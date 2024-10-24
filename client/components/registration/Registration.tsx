@@ -13,6 +13,7 @@ import {
     HStack,
     Heading,
 } from "@chakra-ui/react";
+import { api } from "@/app/api";
 
 export default function Registration() {
     const [formData, setFormData] = useState({
@@ -39,16 +40,37 @@ export default function Registration() {
         setFormData(updatedFormData);
     }
 
-    function handleSubmit(e: React.FormEvent) {
+    async function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
-        toast({
-            title: "Registration Successful",
-            description: "Employee has been registered.",
-            status: "success",
-            duration: 3000,
-            isClosable: true,
-        });
-        console.log(formData);
+        try {
+            const response = await api.post("employees/", formData);
+            toast({
+                title: "Registration Successful",
+                description: "Employee has been registered successfully.",
+                status: "success",
+                duration: 3000,
+                isClosable: true,
+            });
+
+            setFormData({
+                name: "",
+                email: "",
+                phone: "",
+                department: "",
+                position: "",
+                salary: "",
+                hire_date: "",
+            });
+        } catch (error) {
+            toast({
+                title: "Error",
+                description: "Failed to register employee. Please try again.",
+                status: "error",
+                duration: 3000,
+                isClosable: true,
+            });
+            console.error("Registration failed", error);
+        }
     }
 
     function handleClear() {
@@ -174,10 +196,9 @@ export default function Registration() {
                         <Button
                             type="submit"
                             bg="var(--accent-color)"
+                            _hover={{ bg: "var(--accent-hover)" }}
+                            color="white"
                             width="full"
-                            textAlign="center"
-                            whiteSpace="normal"
-                            px={4}
                         >
                             Register Employee
                         </Button>
