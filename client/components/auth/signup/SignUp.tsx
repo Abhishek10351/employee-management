@@ -13,8 +13,10 @@ import {
     useToast,
 } from "@chakra-ui/react";
 import Link from "next/link";
-
+import { api } from "@/app/api";
+import { useRouter } from "next/navigation";
 export default function SignUp() {
+    const router = useRouter();
     const toast = useToast();
 
     const [email, setEmail] = useState("");
@@ -24,7 +26,7 @@ export default function SignUp() {
     function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
 
-        if (!email || !password || !confirmPassword) {
+        if (!email || !password) {
             toast({
                 title: "Please fill all the fields.",
                 status: "warning",
@@ -44,13 +46,48 @@ export default function SignUp() {
             return;
         }
 
-        console.log("Signup Details:", { email, password });
-        toast({
-            title: "Account created successfully.",
-            status: "success",
-            duration: 3000,
-            isClosable: true,
-        });
+        const details = {
+            email: email,
+            password: password,
+        };
+        api.post("/accounts/create/", details)
+            .then((res) => {
+                console.log("Signup Response:", res.data);
+                toast({
+                    title: "Account created successfully.",
+                    status: "success",
+                    duration: 3000,
+                    isClosable: true,
+                });
+                setTimeout(() => {
+                    router.push("auth//login");
+                }, 2000);
+            })
+            .catch((err) => {
+                if (err.response && err.response.data) {
+                    const data = err.response.data;
+                    const message =
+                        data.message ||
+                        data.detail ||
+                        data.email ||
+                        data.password ||
+                        data;
+
+                    toast({
+                        title: message,
+                        status: "error",
+                        duration: 3000,
+                        isClosable: true,
+                    });
+                } else {
+                    toast({
+                        title: "An error occurred. Please try again.",
+                        status: "error",
+                        duration: 3000,
+                        isClosable: true,
+                    });
+                }
+            });
     }
 
     return (
@@ -77,6 +114,7 @@ export default function SignUp() {
                     <Stack spacing={4}>
                         <FormControl isRequired>
                             <FormLabel>Email address</FormLabel>
+
                             <Input
                                 type="email"
                                 placeholder="Enter your email"
