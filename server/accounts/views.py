@@ -46,7 +46,8 @@ class UserViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid():
             data = serializer.data
-            user = User.objects.create_user(**data)
+            username  = data.get("username", None) 
+            user = User.objects.create_user(username=username,**data)
             headers = self.get_success_headers(serializer.data)
             return Response(serializer.data, status=201, headers=headers)
         return Response(serializer.errors, status=400)

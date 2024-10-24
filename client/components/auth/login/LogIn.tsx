@@ -21,15 +21,23 @@ export default function Login() {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [loading, setLoading] = useState(false);
 
     function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
+        setLoading(true);
         const data = { email: email, password: password };
         api.post("/accounts/token/", data)
             .then((res) => {
-                router.push("/");
+                setLoading(false);
+                // router.push("/");
+                // wait for 2 seconds before redirecting
+                setTimeout(() => {
+                    router.push("/");
+                }, 2000);
             })
             .catch((err) => {
+                setLoading(false);
                 toast({
                     title: "Login failed.",
                     description: "Please check your email and password.",
@@ -84,6 +92,8 @@ export default function Login() {
                             bg="var(--accent-color)"
                             type="submit"
                             width="full"
+                            isLoading={loading}
+                            loadingText="Logging in..."
                         >
                             Login
                         </Button>
