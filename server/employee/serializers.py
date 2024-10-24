@@ -7,14 +7,22 @@ class EmployeeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Employee
         # fields = '__all__'
-        fields = ["id","name", "email", "department", "position", "salary", "hire_date"]
+        fields = [
+            "id",
+            "name",
+            "email",
+            "department",
+            "position",
+            "salary",
+            "hire_date",
+        ]
         read_only_fields = ["user"]
-    
+
     def create(self, validated_data):
         user = self.context["request"].user
         employee = Employee.objects.create(user=user, **validated_data)
         return employee
-    
+
     def update(self, instance, validated_data):
         user = self.context["request"].user
         if user.is_staff:
@@ -26,4 +34,3 @@ class EmployeeSerializer(serializers.ModelSerializer):
                     setattr(instance, field, validated_data[field])
             instance.save()
             return instance
-

@@ -6,7 +6,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("employee", "0003_alter_employee_salary"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),

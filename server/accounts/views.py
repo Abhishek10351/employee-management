@@ -73,7 +73,6 @@ class CreateToken(TokenObtainPairView):
     permission_classes = [AllowAny]
 
     def post(self, request, *args, **kwargs):
-
         # set cookies instead of returning json
         response = super().post(request, *args, **kwargs)
         response.set_cookie(
@@ -94,7 +93,6 @@ class RefreshToken(TokenRefreshView):
     permission_classes = [AllowAny]
 
     def post(self, request, *args, **kwargs):
-
         response = super().post(request, *args, **kwargs)
         response.set_cookie(
             key="access",
