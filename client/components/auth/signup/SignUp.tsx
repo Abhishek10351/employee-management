@@ -23,6 +23,8 @@ export default function SignUp() {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
 
+    const [loading, setLoading] = useState(false);
+
     function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
 
@@ -50,8 +52,10 @@ export default function SignUp() {
             email: email,
             password: password,
         };
+        setLoading(true);
         api.post("/accounts/create/", details)
             .then((res) => {
+                setLoading(false);
                 console.log("Signup Response:", res.data);
                 toast({
                     title: "Account created successfully.",
@@ -60,10 +64,11 @@ export default function SignUp() {
                     isClosable: true,
                 });
                 setTimeout(() => {
-                    router.push("auth//login");
+                    router.push("/auth/login");
                 }, 2000);
             })
             .catch((err) => {
+                setLoading(false);
                 if (err.response && err.response.data) {
                     const data = err.response.data;
                     const message =
@@ -147,6 +152,8 @@ export default function SignUp() {
                             bg="var(--accent-color)"
                             type="submit"
                             width="full"
+                            isLoading={loading}
+                            loadingText="Creating Account"
                         >
                             Sign Up
                         </Button>
