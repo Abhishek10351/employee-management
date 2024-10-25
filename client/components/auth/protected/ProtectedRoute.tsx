@@ -1,11 +1,15 @@
 "use client";
 import { api } from "@/app/api";
 import { useState, useEffect } from "react";
-import { Spinner } from "@chakra-ui/react";
+import { Box, Center, Spinner } from "@chakra-ui/react";
+
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 
-function ProtectedRoute({ children }) {
+// import type for children
+import { ReactNode } from "react";
+
+function ProtectedRoute({ children }: { children: ReactNode }) {
     const [isAuthorized, setIsAuthorized] = useState(null);
 
     useEffect(() => {
@@ -53,20 +57,22 @@ function ProtectedRoute({ children }) {
 
     if (isAuthorized === null) {
         return (
-            <Spinner
-                thickness="4px"
-                speed="0.65s"
-                emptyColor="gray.200"
-                color="blue.500"
-                size="xl"
-            />
+            <>
+                <Center height={"100vh"}>
+                    <Box>
+                        <Spinner
+                            thickness="4px"
+                            speed="0.65s"
+                            emptyColor="gray.200"
+                            color="blue.500"
+                            size="xl"
+                        />
+                    </Box>
+                </Center>
+            </>
         );
-        return <div>Loading...</div>;
     }
-
-    return isAuthorized ? children : <div>user not logged in</div>;
-
-    // return isAuthorized ? children : <Navigate to="/auth/login" />;
+    return children;
 }
 
 export default ProtectedRoute;

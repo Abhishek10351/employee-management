@@ -1,13 +1,14 @@
 "use client";
 import { api } from "@/app/api";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { Table, Thead, Tbody, Tr, Th, Td } from "@chakra-ui/react";
-// import { Employee, DeleteEmployeeFunction } from "../../../types/employee";
 import { EmployeePaginator, EmployeeRow } from "../.";
 
+import { Text, Heading, Box, Center, Container } from "@chakra-ui/react";
 export default function EmployeeTable() {
     const [page, setPage] = useState(1);
     const [employees, setEmployees] = useState([]);
+
     const showEmployees = async () => {
         api.get("employees/")
             .then((res) => {
@@ -46,6 +47,14 @@ export default function EmployeeTable() {
 
     return (
         <>
+            <Container>
+                <Heading as="h1" size="lg" textAlign={"center"}>
+                    Employee Table
+                </Heading>
+                <Text fontSize="lg" textAlign={"center"}>
+                    This is a table of all employees in the company
+                </Text>
+            </Container>
             <Table variant="striped" colorScheme="teal">
                 <Thead>
                     <Tr>

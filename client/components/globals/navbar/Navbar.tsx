@@ -2,20 +2,35 @@
 "use client";
 import { Box, Flex, Text, Button, Stack, IconButton } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import "./Navbar.scss";
-
+import { api, logout } from "@/app/api";
+import { useToast } from "@chakra-ui/react";
 export default function Navbar() {
     const router = useRouter();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+    const toast = useToast();
+
+    const handleLogout = () => {
+        logout();
+        setIsAuthenticated(false);
+        toast({
+            title: "Logged out successfully",
+            status: "success",
+            duration: 3000,
+            isClosable: true,
+        });
+    };
 
     function handleLogin() {
         router.push("/auth/login");
     }
 
     function handleSignUp() {
-        router.push("/signup");
+        router.push("/auth/signup");
     }
 
     function handleNavigateTo(path: string) {
@@ -26,7 +41,18 @@ export default function Navbar() {
     function toggleMenu() {
         setIsMenuOpen(!isMenuOpen);
     }
-
+    const checkAuth = async () => {
+        api.get("accounts/me/")
+            .then((res) => {
+                setIsAuthenticated(true);
+            })
+            .catch((err) => {
+                setIsAuthenticated(false);
+            });
+    };
+    useEffect(() => {
+        checkAuth();
+    }, []);
     return (
         <Box
             as="nav"
@@ -70,34 +96,38 @@ export default function Navbar() {
                         </Text>
                         <Text
                             cursor="pointer"
-                            onClick={() => handleNavigateTo("/about-us")}
+                            onClick={() => handleNavigateTo("/employees")}
                         >
-                            About Us
-                        </Text>
-                        <Text
-                            cursor="pointer"
-                            onClick={() => handleNavigateTo("/features")}
-                        >
-                            Features
-                        </Text>
-                        <Text
-                            cursor="pointer"
-                            onClick={() => handleNavigateTo("/blog")}
-                        >
-                            Blog
+                            Employees
                         </Text>
                     </Stack>
-                    <Button
-                        colorScheme="teal"
-                        variant="outline"
-                        onClick={handleSignUp}
-                        mr={4}
-                    >
-                        Sign Up
-                    </Button>
-                    <Button bg={"var(--secondary-color)"} onClick={handleLogin}>
-                        Login
-                    </Button>
+                    {isAuthenticated ? (
+                        <Button
+                            bg={"var(--secondary-color)"}
+                            onClick={() => {
+                                handleLogout();
+                            }}
+                        >
+                            Logout
+                        </Button>
+                    ) : (
+                        <>
+                            <Button
+                                colorScheme="teal"
+                                variant="outline"
+                                onClick={handleSignUp}
+                                mr={4}
+                            >
+                                Sign Up
+                            </Button>
+                            <Button
+                                bg={"var(--secondary-color)"}
+                                onClick={handleLogin}
+                            >
+                                Login
+                            </Button>
+                        </>
+                    )}
                 </Flex>
             </Flex>
 
@@ -127,42 +157,43 @@ export default function Navbar() {
                     </Text>
                     <Text
                         cursor="pointer"
-                        onClick={() => handleNavigateTo("/about-us")}
-                        mt={5}
+                        onClick={() => handleNavigateTo("/employees")}
                     >
-                        About Us
+                        Employees
                     </Text>
-                    <Text
-                        cursor="pointer"
-                        onClick={() => handleNavigateTo("/features")}
-                        mt={5}
-                    >
-                        Features
-                    </Text>
-                    <Text
-                        cursor="pointer"
-                        onClick={() => handleNavigateTo("/blog")}
-                        mt={5}
-                    >
-                        Blog
-                    </Text>
-                    <Button
-                        colorScheme="teal"
-                        variant="outline"
-                        onClick={handleSignUp}
-                        mt={20}
-                        width={"100%"}
-                    >
-                        Sign Up
-                    </Button>
-                    <Button
-                        bg={"var(--secondary-color)"}
-                        onClick={handleLogin}
-                        mt={4}
-                        width={"100%"}
-                    >
-                        Login
-                    </Button>
+
+                    {isAuthenticated ? (
+                        <Button
+                            bg={"var(--secondary-color)"}
+                            onClick={() => {
+                                handleLogout();
+                            }}
+                            mt={20}
+                            width={"100%"}
+                        >
+                            Logout
+                        </Button>
+                    ) : (
+                        <>
+                            <Button
+                                colorScheme="teal"
+                                variant="outline"
+                                onClick={handleSignUp}
+                                mt={20}
+                                width={"100%"}
+                            >
+                                Sign Up
+                            </Button>
+                            <Button
+                                bg={"var(--secondary-color)"}
+                                onClick={handleLogin}
+                                mt={4}
+                                width={"100%"}
+                            >
+                                Login
+                            </Button>
+                        </>
+                    )}
                 </Flex>
             )}
         </Box>
