@@ -1,12 +1,11 @@
 "use client";
 import { api } from "@/app/api";
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Table, Thead, Tbody, Tr, Th, Td } from "@chakra-ui/react";
 import { EmployeePaginator, EmployeeRow } from "../.";
-
+import Link from "next/link";
 import { Text, Heading, Box, Center, Container } from "@chakra-ui/react";
 export default function EmployeeTable() {
-    const [page, setPage] = useState(1);
     const [employees, setEmployees] = useState([]);
 
     const showEmployees = async () => {
@@ -54,6 +53,18 @@ export default function EmployeeTable() {
                 <Text fontSize="lg" textAlign={"center"}>
                     This is a table of all employees in the company
                 </Text>
+                {/* show content for register option which redirects to next page */}
+                <Center>
+                    <Link href="/employees/register">
+                        <Text
+                            fontSize="lg"
+                            textAlign={"center"}
+                            color={"InfoText"}
+                        >
+                            Register New Employee
+                        </Text>
+                    </Link>
+                </Center>
             </Container>
             <Table variant="striped" colorScheme="teal">
                 <Thead>

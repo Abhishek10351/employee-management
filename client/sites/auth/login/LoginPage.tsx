@@ -1,10 +1,13 @@
 import Login from "../../../components/auth/login/LogIn";
-
+import { Navbar } from "../../../components/globals";
 const LoginPage = () => {
     return (
-        <div>
-            <Login />
-        </div>
+        <>
+            <Navbar />
+            <div>
+                <Login />
+            </div>
+        </>
     );
 };
 

@@ -3,14 +3,13 @@ import { api } from "@/app/api";
 import { useState, useEffect } from "react";
 import { Box, Center, Spinner } from "@chakra-ui/react";
 
-import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 
 // import type for children
 import { ReactNode } from "react";
 
 function ProtectedRoute({ children }: { children: ReactNode }) {
-    const [isAuthorized, setIsAuthorized] = useState(null);
+    const [isAuthorized, setIsAuthorized] = useState<boolean | null>(null);
 
     useEffect(() => {
         auth().catch(() => setIsAuthorized(false));
