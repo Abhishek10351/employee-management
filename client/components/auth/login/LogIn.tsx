@@ -30,8 +30,13 @@ export default function Login() {
         api.post("/accounts/token/", data)
             .then((res) => {
                 setLoading(false);
-                // router.push("/");
-                // wait for 2 seconds before redirecting
+                toast({
+                    title: "Login successful.",
+                    description: "Redirecting to dashboard...",
+                    status: "success",
+                    duration: 2000,
+                    isClosable: true,
+                });
                 setTimeout(() => {
                     router.push("/");
                 }, 2000);

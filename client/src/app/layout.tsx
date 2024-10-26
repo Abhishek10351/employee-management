@@ -1,6 +1,8 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { extendTheme, type ThemeConfig } from "@chakra-ui/react";
+import { ColorModeScript } from "@chakra-ui/react";
 import "./globals.css";
 // Import local fonts
 const geistSans = localFont({
@@ -18,6 +20,12 @@ const geistMono = localFont({
 export const metadata: Metadata = {
     title: "Orbit",
     description: "Your HR management tool",
+};
+
+// Theme
+const themeConfig: ThemeConfig = {
+    initialColorMode: "light",
+    useSystemColorMode: false,
 };
 
 // RootLayout Component

@@ -1,11 +1,8 @@
-import { EmployeeTable } from "../../../components/employees";
-import { Navbar } from "../../../components/globals";
-
+import { Employees } from "../../../sites/employees";
 export default function EmployeePage() {
     return (
         <>
-            <Navbar />
-            <EmployeeTable />
+            <Employees />
         </>
     );
 }

@@ -1,5 +1,5 @@
-import RegistrationPage from "../../../../sites/registration/Registration";
+import Registration from "../../../../sites/employees/registration/Registration";
 
-export default function Registration() {
-    return <RegistrationPage />;
+export default function RegistrationPage() {
+    return <Registration />;
 }
