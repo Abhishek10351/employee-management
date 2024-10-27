@@ -56,7 +56,8 @@ export default function Navbar() {
     return (
         <Box
             as="nav"
-            bg="white"
+            height="100vh"
+            bg="var(--background-color)"
             color="var(--text-color)"
             fontFamily="var(--font-heading)"
             p={4}
