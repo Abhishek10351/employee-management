@@ -1,6 +1,5 @@
 from django.db import models
 from django.utils import timezone
-from departments.models import Department
 from accounts.models import User
 from django.core.exceptions import ValidationError
 
