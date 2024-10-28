@@ -29,10 +29,10 @@ export default function Registration() {
 
     const checkAuth = async () => {
         api.get("accounts/me/")
-            .then((res) => {
+            .then(() => {
                 setAuthenticated(true);
             })
-            .catch((err) => {
+            .catch(() => {
                 setAuthenticated(false);
             });
     };
