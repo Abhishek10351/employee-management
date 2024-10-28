@@ -46,8 +46,8 @@ class UserViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid():
             data = serializer.data
-            username  = data.get("username", None) 
-            user = User.objects.create_user(username=username,**data)
+            username = data.get("username", None)
+            User.objects.create_user(username=username, **data)
             headers = self.get_success_headers(serializer.data)
             return Response(serializer.data, status=201, headers=headers)
         return Response(serializer.errors, status=400)
@@ -63,7 +63,9 @@ class UserView(generics.RetrieveAPIView):
         return UserSerializer(self.request.user).data
 
     def get(self, request, *args, **kwargs):
-        return JsonResponse(UserSerializer(self.request.user).data)
+        data = UserSerializer(self.request.user).data
+        data.pop("password")
+        return JsonResponse(data)
 
 
 router = routers.DefaultRouter()
