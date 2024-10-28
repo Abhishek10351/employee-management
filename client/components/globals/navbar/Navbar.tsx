@@ -43,10 +43,10 @@ export default function Navbar() {
     }
     const checkAuth = async () => {
         api.get("accounts/me/")
-            .then((res) => {
+            .then(() => {
                 setIsAuthenticated(true);
             })
-            .catch((err) => {
+            .catch(() => {
                 setIsAuthenticated(false);
             });
     };
@@ -56,7 +56,7 @@ export default function Navbar() {
     return (
         <Box
             as="nav"
-            height="100vh"
+            // height="100vh"
             bg="var(--background-color)"
             color="var(--text-color)"
             fontFamily="var(--font-heading)"
