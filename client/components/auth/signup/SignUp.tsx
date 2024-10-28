@@ -13,6 +13,7 @@ import {
     useToast,
 } from "@chakra-ui/react";
 import Link from "next/link";
+
 import { api } from "@/app/api";
 import { useRouter } from "next/navigation";
 export default function SignUp() {
@@ -72,7 +73,7 @@ export default function SignUp() {
                 if (err.response && err.response.data) {
                     if (
                         err.response.headers["content-type"].includes(
-                            "text/html",
+                            "text/html"
                         )
                     ) {
                         toast({
@@ -107,9 +108,6 @@ export default function SignUp() {
                 }
             });
     }
-    const navigateToLogin = () => {
-        router.push("/auth/login");
-    };
 
     return (
         <Box
@@ -179,9 +177,10 @@ export default function SignUp() {
                             <Button
                                 variant="link"
                                 colorScheme="teal"
-                                onClick={navigateToLogin}
+                                // onClick={navigateToLogin}
                             >
-                                Login
+                                {/* Login */}
+                                <Link href="/auth/login">Login</Link>
                             </Button>
                         </Text>
                     </Stack>

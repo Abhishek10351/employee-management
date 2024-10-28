@@ -13,8 +13,8 @@ import {
     useToast,
 } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 import { api } from "@/app/api";
+import Link from "next/link";
 export default function Login() {
     const router = useRouter();
     const toast = useToast();
@@ -28,7 +28,7 @@ export default function Login() {
         setLoading(true);
         const data = { email: email, password: password };
         api.post("/accounts/token/", data)
-            .then((res) => {
+            .then(() => {
                 setLoading(false);
                 toast({
                     title: "Login successful.",
@@ -43,9 +43,17 @@ export default function Login() {
             })
             .catch((err) => {
                 setLoading(false);
+                let message = "An error occurred. Please try again later.";
+                if (err.response) {
+                    const res = err.response;
+                    message = res.email || res.password || res.detail || res;
+                    if (typeof message === "object") {
+                        message = "An error occurred. Please try again later.";
+                    }
+                }
                 toast({
                     title: "Login failed.",
-                    description: "Please check your email and password.",
+                    description: message,
                     status: "error",
                     duration: 2000,
                     isClosable: true,
@@ -78,7 +86,7 @@ export default function Login() {
                         <FormControl isRequired>
                             <FormLabel>Email</FormLabel>
                             <Input
-                                // type="email"
+                                type="email"
                                 placeholder="Enter your email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
@@ -103,13 +111,9 @@ export default function Login() {
                             Login
                         </Button>
                         <Text textAlign="center" mt={2}>
-                            Don't have an account?{" "}
-                            <Button
-                                variant="link"
-                                colorScheme="teal"
-                                onClick={() => router.push("/signup")}
-                            >
-                                Sign Up
+                            Don&apos;t have an account?{" "}
+                            <Button variant="link" colorScheme="teal">
+                                <Link href="/auth/signup">Sign Up</Link>
                             </Button>
                         </Text>
                     </Stack>

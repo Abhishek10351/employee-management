@@ -13,7 +13,7 @@ export default function Faq() {
     // Static colors for modern styles
     const bgColor = "gray.100";
     const panelBg = "white";
-    const headingColor = "purple.500";
+    // const headingColor = "purple.500";
     const textColor = "gray.700";
     const borderColor = "gray.300";
 
@@ -113,8 +113,8 @@ export default function Faq() {
                             color={textColor}
                             fontFamily="var(--font-primary)"
                         >
-                            To register a new employee, go to the "Register
-                            Employee" section, fill in their personal details
+                            To register a new employee, go to the &quot;Register
+                            Employee&quot; section, fill in their personal details
                             (name, department, email, etc.), and submit the
                             form. The employee will be added to your system and
                             can be managed from the dashboard.

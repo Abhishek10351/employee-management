@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Table, Thead, Tbody, Tr, Th, Td } from "@chakra-ui/react";
 import { EmployeePaginator, EmployeeRow } from "../.";
 import Link from "next/link";
-import { Text, Heading, Box, Center, Container } from "@chakra-ui/react";
+import { Text, Heading, Center, Container } from "@chakra-ui/react";
 export default function EmployeeTable() {
     const [employees, setEmployees] = useState([]);
 
@@ -26,7 +26,7 @@ export default function EmployeeTable() {
     };
     const deleteEmploy = async (id: number) => {
         api.delete(`employees/${id}/`)
-            .then((res) => {
+            .then(() => {
                 showEmployees();
             })
             .catch((err) => {
