@@ -107,6 +107,9 @@ export default function SignUp() {
                 }
             });
     }
+    const navigateToLogin = () => {
+        router.push("/auth/login");
+    };
 
     return (
         <Box
@@ -173,11 +176,13 @@ export default function SignUp() {
 
                         <Text textAlign="center" mt={2}>
                             Already have an account?{" "}
-                            <Link href="/login" passHref>
-                                <Button variant="link" colorScheme="teal">
-                                    Login
-                                </Button>
-                            </Link>
+                            <Button
+                                variant="link"
+                                colorScheme="teal"
+                                onClick={navigateToLogin}
+                            >
+                                Login
+                            </Button>
                         </Text>
                     </Stack>
                 </form>
