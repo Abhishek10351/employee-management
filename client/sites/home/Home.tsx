@@ -4,9 +4,11 @@ export default function HomePage() {
     return (
         <>
             <Navbar />
-            <Hero />
-            <Work />
-            <Faq />
+            <main>
+                <Hero />
+                <Work />
+                <Faq />
+            </main>
         </>
     );
 }
