@@ -14,6 +14,7 @@ import {
     Heading,
 } from "@chakra-ui/react";
 import { api } from "@/app/api";
+import { useRouter } from "next/navigation";
 
 export default function Registration() {
     const [formData, setFormData] = useState({
@@ -26,6 +27,7 @@ export default function Registration() {
         hire_date: "",
     });
     const [authenticated, setAuthenticated] = useState(false);
+    const router = useRouter();
 
     const checkAuth = async () => {
         api.get("accounts/me/")
@@ -58,7 +60,7 @@ export default function Registration() {
     async function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
         try {
-            const response = await api.post("employees/", formData);
+            await api.post("employees/", formData);
             toast({
                 title: "Registration Successful",
                 description: "Employee has been registered successfully.",
@@ -66,6 +68,9 @@ export default function Registration() {
                 duration: 3000,
                 isClosable: true,
             });
+
+            // Redirect to the employee table page after successful submission
+            router.push("/employees");
 
             setFormData({
                 name: "",
