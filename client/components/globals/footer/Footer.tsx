@@ -47,7 +47,7 @@ export default function Footer() {
                 <Text fontSize="sm">
                     Created by &nbsp;
                     <Link
-                        href="https://www.linkedin.com/in/abhishek30125/"
+                        href="https://linktr.ee/Abhishek10351"
                         fontSize="sm"
                         color="orange.500"
                         mr={2}
