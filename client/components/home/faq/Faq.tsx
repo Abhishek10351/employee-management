@@ -18,7 +18,7 @@ export default function Faq() {
     const borderColor = "gray.300";
 
     return (
-        <Box bg={bgColor} py={12} borderRadius="30%">
+        <Box py={12}>
             <Container maxW="800px">
                 {/* Main Heading */}
                 <Heading
@@ -26,7 +26,7 @@ export default function Faq() {
                     size="xl"
                     textAlign="center"
                     mb={8}
-                    color="#184710"
+                    color="var(--text-colorr)"
                     fontWeight="bold"
                     fontFamily="var(--font-primary)"
                 >
@@ -49,6 +49,7 @@ export default function Faq() {
                                 borderRadius="md"
                                 boxShadow="md"
                                 p={6}
+                                bg={"var(--form-color)"}
                             >
                                 <Box
                                     flex="1"
@@ -64,7 +65,7 @@ export default function Faq() {
                         </h2>
                         <AccordionPanel
                             pb={4}
-                            bg={panelBg}
+                            bg={"var(--form-color)"}
                             borderBottomRadius="md"
                             p={6}
                             color={textColor}
@@ -92,6 +93,7 @@ export default function Faq() {
                                 borderRadius="md"
                                 boxShadow="md"
                                 p={6}
+                                bg={"var(--form-color)"}
                             >
                                 <Box
                                     flex="1"
@@ -107,17 +109,17 @@ export default function Faq() {
                         </h2>
                         <AccordionPanel
                             pb={4}
-                            bg={panelBg}
+                            bg={"var(--form-color)"}
                             borderBottomRadius="md"
                             p={6}
                             color={textColor}
                             fontFamily="var(--font-primary)"
                         >
                             To register a new employee, go to the &quot;Register
-                            Employee&quot; section, fill in their personal details
-                            (name, department, email, etc.), and submit the
-                            form. The employee will be added to your system and
-                            can be managed from the dashboard.
+                            Employee&quot; section, fill in their personal
+                            details (name, department, email, etc.), and submit
+                            the form. The employee will be added to your system
+                            and can be managed from the dashboard.
                         </AccordionPanel>
                     </AccordionItem>
 
@@ -150,7 +152,7 @@ export default function Faq() {
                         </h2>
                         <AccordionPanel
                             pb={4}
-                            bg={panelBg}
+                            bg={"var(--form-color)"}
                             borderBottomRadius="md"
                             p={6}
                             color={textColor}
