@@ -11,8 +11,8 @@ import {
 
 export default function Faq() {
     // Static colors for modern styles
-    const bgColor = "gray.100";
-    const panelBg = "white";
+    // const bgColor = "gray.100";
+    // const panelBg = "white";
     // const headingColor = "purple.500";
     const textColor = "gray.700";
     const borderColor = "gray.300";
