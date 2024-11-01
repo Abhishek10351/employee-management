@@ -1,6 +1,13 @@
-// components/Navbar.tsx
 "use client";
-import { Box, Flex, Text, Button, Stack, IconButton } from "@chakra-ui/react";
+import {
+    Box,
+    Flex,
+    Text,
+    Button,
+    Stack,
+    IconButton,
+    Image,
+} from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
@@ -60,6 +67,7 @@ export default function Navbar() {
             bg="var(--background-color)"
             color="var(--text-color)"
             fontFamily="var(--font-heading)"
+            fontSize="17"
             p={4}
             position="relative"
             display={"list-item"}
@@ -70,9 +78,12 @@ export default function Navbar() {
                 maxWidth="1200px"
                 mx="auto"
             >
-                <Text fontSize="xl" fontWeight="bold">
-                    Orbit
-                </Text>
+                <Image
+                    src="/assets/brand-logos/logo-orbit-01.png"
+                    alt="Orbit Logo"
+                    width={150}
+                    height={70}
+                />
 
                 <IconButton
                     icon={isMenuOpen ? <CloseIcon /> : <HamburgerIcon />}
@@ -92,12 +103,14 @@ export default function Navbar() {
                         <Text
                             cursor="pointer"
                             onClick={() => handleNavigateTo("/")}
+                            fontWeight={600}
                         >
                             Home
                         </Text>
                         <Text
                             cursor="pointer"
                             onClick={() => handleNavigateTo("/employees")}
+                            fontWeight={600}
                         >
                             Employees
                         </Text>
@@ -108,22 +121,27 @@ export default function Navbar() {
                             onClick={() => {
                                 handleLogout();
                             }}
+                            fontWeight={600}
                         >
                             Logout
                         </Button>
                     ) : (
                         <>
                             <Button
-                                colorScheme="teal"
+                                _hover={{ bg: "var(--secondary-color)" }}
                                 variant="outline"
                                 onClick={handleSignUp}
                                 mr={4}
+                                fontWeight={600}
+                                border={"1px solid var(--text-color)"}
                             >
                                 Sign Up
                             </Button>
                             <Button
-                                bg={"var(--secondary-color)"}
+                                bg={"var(--primary-color)"}
                                 onClick={handleLogin}
+                                _hover={{ bg: "var(--secondary-color)" }}
+                                fontWeight={600}
                             >
                                 Login
                             </Button>
@@ -138,7 +156,7 @@ export default function Navbar() {
                     direction="column"
                     align="center"
                     width="60%"
-                    height={"45vh"}
+                    height={"35vh"}
                     position="absolute"
                     right={isMenuOpen ? "0" : "-100%"}
                     transition="left 1s ease"
@@ -153,12 +171,16 @@ export default function Navbar() {
                     <Text
                         cursor="pointer"
                         onClick={() => handleNavigateTo("/")}
+                        mt={2}
+                        fontWeight={500}
                     >
                         Home
                     </Text>
                     <Text
                         cursor="pointer"
                         onClick={() => handleNavigateTo("/employees")}
+                        mt={5}
+                        fontWeight={500}
                     >
                         Employees
                     </Text>
@@ -171,6 +193,7 @@ export default function Navbar() {
                             }}
                             mt={20}
                             width={"100%"}
+                            fontWeight={500}
                         >
                             Logout
                         </Button>
@@ -182,14 +205,16 @@ export default function Navbar() {
                                 onClick={handleSignUp}
                                 mt={20}
                                 width={"100%"}
+                                fontWeight={600}
                             >
                                 Sign Up
                             </Button>
                             <Button
-                                bg={"var(--secondary-color)"}
+                                bg={"var(--primary-color)"}
                                 onClick={handleLogin}
                                 mt={4}
                                 width={"100%"}
+                                fontWeight={600}
                             >
                                 Login
                             </Button>

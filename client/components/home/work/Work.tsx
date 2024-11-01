@@ -12,7 +12,7 @@ import { FaUser, FaChartLine, FaTasks } from "react-icons/fa";
 
 export default function HowItWorks() {
     return (
-        <Box bg="var(--form-color)" py={16} color="black">
+        <Box py={16} color="black">
             <Container maxW="1200px">
                 <Heading
                     as="h2"
@@ -20,6 +20,7 @@ export default function HowItWorks() {
                     textAlign="center"
                     mb={8}
                     fontFamily="var(--font-primary)"
+                    color={"var(--text-color)"}
                 >
                     How it works
                 </Heading>
@@ -39,7 +40,7 @@ export default function HowItWorks() {
                     <VStack
                         bg="#004246"
                         color="white"
-                        borderRadius="lg"
+                        borderRadius={"3xl"}
                         p={8}
                         m={4}
                         maxW="320px"
@@ -52,11 +53,15 @@ export default function HowItWorks() {
                             color="var(--accent-color)"
                             mb={4}
                         />
-                        <Heading size="md" fontFamily="var(--font-heading)">
+                        <Heading
+                            size="md"
+                            fontFamily="var(--font-heading)"
+                            fontSize={22}
+                        >
                             Register Employee
                         </Heading>
                         <Text
-                            fontSize="sm"
+                            fontSize="l"
                             mt={2}
                             fontWeight={"500"}
                             fontFamily="var(--font-heading)"
@@ -70,7 +75,7 @@ export default function HowItWorks() {
                     <VStack
                         bg="#004246"
                         color="white"
-                        borderRadius="lg"
+                        borderRadius={"3xl"}
                         p={8}
                         m={4}
                         maxW="320px"
@@ -83,11 +88,15 @@ export default function HowItWorks() {
                             color="var(--accent-color)"
                             mb={4}
                         />
-                        <Heading size="md" fontFamily="var(--font-heading)">
+                        <Heading
+                            size="md"
+                            fontFamily="var(--font-heading)"
+                            fontSize={22}
+                        >
                             Manage Employee Data
                         </Heading>
                         <Text
-                            fontSize="sm"
+                            fontSize="l"
                             mt={2}
                             fontWeight={"500"}
                             fontFamily="var(--font-heading)"
@@ -101,7 +110,7 @@ export default function HowItWorks() {
                     <VStack
                         bg="#004246"
                         color="white"
-                        borderRadius="lg"
+                        borderRadius={"3xl"}
                         p={8}
                         m={4}
                         maxW="320px"
@@ -114,11 +123,15 @@ export default function HowItWorks() {
                             color="var(--accent-color)"
                             mb={4}
                         />
-                        <Heading size="md" fontFamily="var(--font-heading)">
+                        <Heading
+                            size="md"
+                            fontFamily="var(--font-heading)"
+                            fontSize={22}
+                        >
                             Assign and Track Tasks
                         </Heading>
                         <Text
-                            fontSize="sm"
+                            fontSize="l"
                             fontStyle="bd"
                             mt={2}
                             fontFamily="var(--font-heading)"

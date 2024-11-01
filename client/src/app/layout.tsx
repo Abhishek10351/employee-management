@@ -1,8 +1,9 @@
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider, Box } from "@chakra-ui/react";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Footer } from "../../components/globals";
 import "./globals.css";
+
 // Import local fonts
 const geistSans = localFont({
     src: "./fonts/GeistVF.woff",
@@ -33,8 +34,10 @@ export default function RootLayout({
                 className={`${geistSans.variable} ${geistMono.variable} antialiased`}
             >
                 <ChakraProvider>
-                    {children}
-                    <Footer />
+                    <Box bg="var(--background-color)" minH="100vh">
+                        {children}
+                        <Footer />
+                    </Box>
                 </ChakraProvider>
             </body>
         </html>
