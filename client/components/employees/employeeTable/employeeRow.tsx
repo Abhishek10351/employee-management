@@ -1,5 +1,4 @@
 "use client";
-
 import {
     Button,
     ButtonGroup,
@@ -58,7 +57,7 @@ export default function EmployeeRow({
                     onClose={() => setIsDialogOpen(false)}
                 >
                     <AlertDialogOverlay>
-                        <AlertDialogContent>
+                        <AlertDialogContent fontFamily="var(--font-primary)">
                             <AlertDialogHeader fontSize="lg" fontWeight="bold">
                                 Delete Employee?
                             </AlertDialogHeader>
