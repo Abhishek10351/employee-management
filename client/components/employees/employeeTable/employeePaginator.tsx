@@ -5,8 +5,7 @@ import { Center } from "@chakra-ui/react";
 
 export default function EmployeePaginator() {
     return (
-
-        <Center my={3}>
+        <Center my={3} fontFamily="var(--primary-font)">
             <ButtonGroup>
                 <Button leftIcon={<ArrowBackIcon />}>Previous</Button>
                 <Button>1</Button>
