@@ -7,23 +7,36 @@ import {
     Stack,
     IconButton,
     Image,
+    Popover,
+    PopoverTrigger,
+    PopoverContent,
+    PopoverArrow,
+    PopoverCloseButton,
+    PopoverHeader,
+    PopoverBody,
+    useToast,
 } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import "./Navbar.scss";
 import { api, logout } from "@/app/api";
-import { useToast } from "@chakra-ui/react";
+
+type UserData = {
+    email: string;
+};
+
 export default function Navbar() {
     const router = useRouter();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
-
+    const [userData, setUserData] = useState<UserData | null>(null);
     const toast = useToast();
 
     const handleLogout = () => {
         logout();
         setIsAuthenticated(false);
+        setUserData(null);
         toast({
             title: "Logged out successfully",
             status: "success",
@@ -48,22 +61,25 @@ export default function Navbar() {
     function toggleMenu() {
         setIsMenuOpen(!isMenuOpen);
     }
+
     const checkAuth = async () => {
-        api.get("accounts/me/")
-            .then(() => {
-                setIsAuthenticated(true);
-            })
-            .catch(() => {
-                setIsAuthenticated(false);
-            });
+        try {
+            const response = await api.get("accounts/me/");
+            setIsAuthenticated(true);
+            setUserData(response.data);
+        } catch (error) {
+            setIsAuthenticated(false);
+            setUserData(null);
+        }
     };
+
     useEffect(() => {
         checkAuth();
     }, []);
+
     return (
         <Box
             as="nav"
-            // height="100vh"
             bg="var(--background-color)"
             color="var(--text-color)"
             fontFamily="var(--font-heading)"
@@ -115,16 +131,46 @@ export default function Navbar() {
                             Employees
                         </Text>
                     </Stack>
+
                     {isAuthenticated ? (
-                        <Button
-                            bg={"var(--secondary-color)"}
-                            onClick={() => {
-                                handleLogout();
-                            }}
-                            fontWeight={600}
-                        >
-                            Logout
-                        </Button>
+                        <Popover>
+                            <PopoverTrigger>
+                                <Image
+                                    src="/assets/avatar/user.png"
+                                    alt="User Avatar"
+                                    width={10}
+                                    height={10}
+                                    borderRadius="full"
+                                    mr={4}
+                                    cursor="pointer"
+                                />
+                            </PopoverTrigger>
+                            <PopoverContent width="200px">
+                                <PopoverArrow />
+                                <PopoverCloseButton />
+                                <PopoverHeader>Account</PopoverHeader>
+                                <PopoverBody>
+                                    {userData ? (
+                                        <Text fontSize="sm">
+                                            {`Logged in as ${userData.email}`}
+                                        </Text>
+                                    ) : (
+                                        <Text fontSize="sm">
+                                            Loading user details...
+                                        </Text>
+                                    )}
+                                    <Button
+                                        mt={2}
+                                        width="100%"
+                                        bg="var(--secondary-color)"
+                                        onClick={handleLogout}
+                                        fontWeight={600}
+                                    >
+                                        Logout
+                                    </Button>
+                                </PopoverBody>
+                            </PopoverContent>
+                        </Popover>
                     ) : (
                         <>
                             <Button
@@ -188,9 +234,7 @@ export default function Navbar() {
                     {isAuthenticated ? (
                         <Button
                             bg={"var(--secondary-color)"}
-                            onClick={() => {
-                                handleLogout();
-                            }}
+                            onClick={handleLogout}
                             mt={20}
                             width={"100%"}
                             fontWeight={500}
