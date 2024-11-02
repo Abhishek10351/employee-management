@@ -12,6 +12,9 @@ import {
     useToast,
     HStack,
     Heading,
+    Spinner,
+    Center,
+    Text,
 } from "@chakra-ui/react";
 import { api } from "@/app/api";
 import { useRouter } from "next/navigation";
@@ -27,16 +30,19 @@ export default function Registration() {
         hire_date: "",
     });
     const [authenticated, setAuthenticated] = useState(false);
+    const [loadingAuth, setLoadingAuth] = useState(true);
     const router = useRouter();
 
     const checkAuth = async () => {
-        api.get("accounts/me/")
-            .then(() => {
-                setAuthenticated(true);
-            })
-            .catch(() => {
-                setAuthenticated(false);
-            });
+        setLoadingAuth(true);
+        try {
+            await api.get("accounts/me/");
+            setAuthenticated(true);
+        } catch {
+            setAuthenticated(false);
+        } finally {
+            setLoadingAuth(false);
+        }
     };
 
     useEffect(() => {
@@ -68,10 +74,7 @@ export default function Registration() {
                 duration: 3000,
                 isClosable: true,
             });
-
-            // Redirect to the employee table page after successful submission
             router.push("/employees");
-
             setFormData({
                 name: "",
                 email: "",
@@ -89,7 +92,6 @@ export default function Registration() {
                 duration: 3000,
                 isClosable: true,
             });
-            console.error("Registration failed", error);
         }
     }
 
@@ -103,7 +105,6 @@ export default function Registration() {
             salary: "",
             hire_date: "",
         });
-
         toast({
             title: "Form Cleared",
             description: "All fields have been reset.",
@@ -111,6 +112,14 @@ export default function Registration() {
             duration: 3000,
             isClosable: true,
         });
+    }
+
+    if (loadingAuth) {
+        return (
+            <Center h="80vh">
+                <Spinner size="xl" color="var(--accent-color)" />
+            </Center>
+        );
     }
 
     return (
@@ -123,28 +132,37 @@ export default function Registration() {
                     p={5}
                     boxShadow="lg"
                     borderRadius="md"
-                    bg={"var(--form-color)"}
+                    bg="var(--form-color)"
+                    textAlign="center"
                 >
-                    <Heading as="h2" size={"md"} mb={6} textAlign="center">
-                        You must be logged in to register an employee.
+                    <Heading as="h2" size="md" mb={4}>
+                        Access Restricted
                     </Heading>
+                    <Text color="gray.500">
+                        You must be logged in to register an employee.
+                    </Text>
                 </Box>
             ) : (
                 <Box
                     maxW="700px"
                     mx="auto"
                     mt={10}
-                    p={5}
+                    p={8}
                     boxShadow="lg"
                     borderRadius="md"
-                    bg={"var(--form-color)"}
+                    bg="var(--form-color)"
                 >
-                    <Heading as="h2" size="lg" mb={6} textAlign="center">
+                    <Heading
+                        as="h2"
+                        size="lg"
+                        mb={6}
+                        textAlign="center"
+                        fontFamily={"var(--font-heading)"}
+                    >
                         Employee Registration Form
                     </Heading>
-
                     <form onSubmit={handleSubmit}>
-                        <VStack spacing={4}>
+                        <VStack spacing={5} fontFamily={"var(--font-primary)"}>
                             <FormControl id="name" isRequired>
                                 <FormLabel>Name</FormLabel>
                                 <Input
@@ -153,6 +171,7 @@ export default function Registration() {
                                     value={formData.name}
                                     onChange={handleChange}
                                     placeholder="Enter name"
+                                    focusBorderColor="var(--accent-color)"
                                 />
                             </FormControl>
 
@@ -164,6 +183,7 @@ export default function Registration() {
                                     value={formData.email}
                                     onChange={handleChange}
                                     placeholder="Enter email"
+                                    focusBorderColor="var(--accent-color)"
                                 />
                             </FormControl>
 
@@ -175,6 +195,7 @@ export default function Registration() {
                                     value={formData.phone}
                                     onChange={handleChange}
                                     placeholder="Enter phone number"
+                                    focusBorderColor="var(--accent-color)"
                                 />
                             </FormControl>
 
@@ -185,6 +206,7 @@ export default function Registration() {
                                     value={formData.department}
                                     onChange={handleChange}
                                     placeholder="Select department"
+                                    focusBorderColor="var(--accent-color)"
                                 >
                                     <option value="HR">HR</option>
                                     <option value="Engineering">
@@ -204,6 +226,7 @@ export default function Registration() {
                                     value={formData.position}
                                     onChange={handleChange}
                                     placeholder="Enter position"
+                                    focusBorderColor="var(--accent-color)"
                                 />
                             </FormControl>
 
@@ -216,6 +239,7 @@ export default function Registration() {
                                     onChange={handleChange}
                                     placeholder="Enter salary"
                                     step="0.01"
+                                    focusBorderColor="var(--accent-color)"
                                 />
                             </FormControl>
 
@@ -227,6 +251,7 @@ export default function Registration() {
                                     value={formData.hire_date}
                                     onChange={handleChange}
                                     placeholder="Select hire date"
+                                    focusBorderColor="var(--accent-color)"
                                 />
                             </FormControl>
 
@@ -234,8 +259,8 @@ export default function Registration() {
                                 <Button
                                     type="submit"
                                     bg="var(--accent-color)"
-                                    _hover={{ bg: "var(--accent-hover)" }}
-                                    color="white"
+                                    color="black"
+                                    _hover={{ bg: "var(--accent-color)" }}
                                     width="full"
                                 >
                                     Register Employee
