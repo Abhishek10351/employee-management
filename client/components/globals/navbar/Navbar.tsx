@@ -18,7 +18,7 @@ import {
 } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
-import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
+import { HamburgerIcon, CloseIcon, ChevronDownIcon } from "@chakra-ui/icons";
 import "./Navbar.scss";
 import { api, logout } from "@/app/api";
 
@@ -31,6 +31,7 @@ export default function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [userData, setUserData] = useState<UserData | null>(null);
+    const [isArrowRotated, setIsArrowRotated] = useState(false);
     const toast = useToast();
 
     const handleLogout = () => {
@@ -97,8 +98,8 @@ export default function Navbar() {
                 <Image
                     src="/assets/brand-logos/logo-orbit-01.png"
                     alt="Orbit Logo"
-                    width={150}
-                    height={70}
+                    width={132}
+                    height={55}
                 />
 
                 <IconButton
@@ -133,17 +134,31 @@ export default function Navbar() {
                     </Stack>
 
                     {isAuthenticated ? (
-                        <Popover>
+                        <Popover
+                            onOpen={() => setIsArrowRotated(true)}
+                            onClose={() => setIsArrowRotated(false)}
+                        >
                             <PopoverTrigger>
-                                <Image
-                                    src="/assets/avatar/user.png"
-                                    alt="User Avatar"
-                                    width={10}
-                                    height={10}
-                                    borderRadius="full"
-                                    mr={4}
-                                    cursor="pointer"
-                                />
+                                <Flex align="center" cursor="pointer">
+                                    <Image
+                                        src="/assets/avatar/user.png"
+                                        alt="User Avatar"
+                                        width={10}
+                                        height={10}
+                                        borderRadius="full"
+                                        mr={2}
+                                    />
+                                    <ChevronDownIcon
+                                        w={5}
+                                        h={5}
+                                        transform={
+                                            isArrowRotated
+                                                ? "rotate(180deg)"
+                                                : "rotate(0)"
+                                        }
+                                        transition="transform 0.2s"
+                                    />
+                                </Flex>
                             </PopoverTrigger>
                             <PopoverContent width="200px">
                                 <PopoverArrow />
@@ -214,11 +229,30 @@ export default function Navbar() {
                     zIndex={100}
                     display={{ base: "flex", md: "none" }}
                 >
+                    {isAuthenticated && userData ? (
+                        <Flex align="center" mb={4}>
+                            <Image
+                                src="/assets/avatar/user.png"
+                                alt="User Avatar"
+                                width={6}
+                                height={6}
+                                borderRadius="full"
+                                mr={2}
+                            />
+                            <Text
+                                fontWeight={500}
+                                fontSize="sm"
+                            >{`Logged in as ${userData.email}`}</Text>
+                        </Flex>
+                    ) : null}
+
                     <Text
                         cursor="pointer"
                         onClick={() => handleNavigateTo("/")}
                         mt={2}
                         fontWeight={500}
+                        fontSize="sm" // Decreased font size
+                        paddingY={2} // Added padding for better spacing
                     >
                         Home
                     </Text>
@@ -227,6 +261,8 @@ export default function Navbar() {
                         onClick={() => handleNavigateTo("/employees")}
                         mt={5}
                         fontWeight={500}
+                        fontSize="sm" // Decreased font size
+                        paddingY={2} // Added padding for better spacing
                     >
                         Employees
                     </Text>
@@ -238,6 +274,8 @@ export default function Navbar() {
                             mt={20}
                             width={"100%"}
                             fontWeight={500}
+                            size="lg" // Increased size
+                            paddingY={4} // Added padding for better appearance
                         >
                             Logout
                         </Button>
@@ -250,6 +288,8 @@ export default function Navbar() {
                                 mt={20}
                                 width={"100%"}
                                 fontWeight={600}
+                                size="lg" // Increased size
+                                paddingY={4} // Added padding for better appearance
                             >
                                 Sign Up
                             </Button>
@@ -259,6 +299,8 @@ export default function Navbar() {
                                 mt={4}
                                 width={"100%"}
                                 fontWeight={600}
+                                size="lg" // Increased size
+                                paddingY={4} // Added padding for better appearance
                             >
                                 Login
                             </Button>
