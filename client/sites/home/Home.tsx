@@ -1,5 +1,5 @@
 import { Navbar } from "../../components/globals";
-import { Work, Faq, Hero } from "../../components/home";
+import { Work, Faq, Hero, Testimonial, Clients } from "../../components/home";
 export default function HomePage() {
     return (
         <>
@@ -7,6 +7,8 @@ export default function HomePage() {
             <main>
                 <Hero />
                 <Work />
+                <Testimonial />
+                <Clients />
                 <Faq />
             </main>
         </>
