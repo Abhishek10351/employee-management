@@ -67,7 +67,6 @@ export default function Login() {
             display="flex"
             justifyContent="center"
             alignItems="center"
-            bg="gray.100"
         >
             <Box
                 w="full"
@@ -76,7 +75,8 @@ export default function Login() {
                 borderWidth={1}
                 borderRadius="lg"
                 boxShadow="lg"
-                bg="white"
+                bg={"var(--form-color)"}
+                fontFamily={"var(--font-primary)"}
             >
                 <Heading mb={4} fontSize="2xl" textAlign="center">
                     Login

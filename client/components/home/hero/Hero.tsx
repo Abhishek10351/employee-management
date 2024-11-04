@@ -216,12 +216,13 @@ export default function Hero() {
             <Box
                 position="absolute"
                 bottom={{ base: "80px", md: "5" }}
-                left="40%"
+                left="50%"
                 transform="translateX(-50%)"
                 display="flex"
                 flexDirection="column"
                 alignItems="center"
                 animation={`${bounce} 2s infinite`}
+                cursor="pointer"
             >
                 <Box
                     backgroundColor="var(--menu-color)"

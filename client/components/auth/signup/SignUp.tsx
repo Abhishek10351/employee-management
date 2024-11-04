@@ -73,7 +73,7 @@ export default function SignUp() {
                 if (err.response && err.response.data) {
                     if (
                         err.response.headers["content-type"].includes(
-                            "text/html"
+                            "text/html",
                         )
                     ) {
                         toast({
@@ -115,7 +115,6 @@ export default function SignUp() {
             display="flex"
             justifyContent="center"
             alignItems="center"
-            bg="gray.100"
         >
             <Box
                 w="full"
@@ -124,7 +123,8 @@ export default function SignUp() {
                 borderWidth={1}
                 borderRadius="lg"
                 boxShadow="lg"
-                bg="white"
+                bg={"var(--form-color)"}
+                fontFamily={"var(--font-primary)"}
             >
                 <Heading mb={4} fontSize="2xl" textAlign="center">
                     Sign Up
@@ -168,6 +168,7 @@ export default function SignUp() {
                             width="full"
                             isLoading={loading}
                             loadingText="Creating Account"
+                            _hover={{ bg: "yellow.300" }}
                         >
                             Sign Up
                         </Button>
