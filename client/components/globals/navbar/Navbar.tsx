@@ -68,7 +68,7 @@ export default function Navbar() {
             const response = await api.get("accounts/me/");
             setIsAuthenticated(true);
             setUserData(response.data);
-        } catch (error) {
+        } catch {
             setIsAuthenticated(false);
             setUserData(null);
         }
