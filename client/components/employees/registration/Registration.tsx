@@ -84,7 +84,7 @@ export default function Registration() {
                 salary: "",
                 hire_date: "",
             });
-        } catch (error) {
+        } catch {
             toast({
                 title: "Error",
                 description: "Failed to register employee. Please try again.",
