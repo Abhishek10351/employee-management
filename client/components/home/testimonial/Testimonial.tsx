@@ -22,9 +22,7 @@ type Testimonial = {
 
 const Testimonials = () => {
     const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
-
-    useEffect(() => {
-        const fetchTestimonials = async () => {
+    const fetchTestimonials = async () => {
             try {
                 const response = await fetch(
                     "/data/testimonial/TestimonialData.json",
@@ -35,7 +33,7 @@ const Testimonials = () => {
                 console.error("Error fetching testimonials:", error);
             }
         };
-
+    useEffect(() => {
         fetchTestimonials();
     }, []);
 
