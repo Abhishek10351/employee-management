@@ -15,6 +15,7 @@ django-cors-headers = "^4.5.0"
 djangorestframework-simplejwt = {extras = ["crypto"], version = "^5.3.1"}
 django-filter = "^24.3"
 django-silk = "^5.2.0"
+whitenoise = "^6.8.2"
 
 
 [tool.poetry.group.dev.dependencies]
