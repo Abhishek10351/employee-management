@@ -1,6 +1,11 @@
 import axios from "axios";
+import { config } from "dotenv";
+
+config();
 import Cookies from "js-cookie";
-const baseURL = "http://localhost:8000";
+let baseURL = "http://localhost:8000";
+baseURL = process.env.baseURL || baseURL;
+
 const settings = {
     baseURL: baseURL,
     withCredentials: true,
