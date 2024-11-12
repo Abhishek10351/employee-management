@@ -32,7 +32,10 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 DEBUG = os.getenv("DEBUG", "True") == "False"
 
 # ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
-ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS").split(" ")
+DEFAULT_ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+if os.getenv("ALLOWED_HOSTS"):
+    DEFAULT_ALLOWED_HOSTS.extend(os.getenv("ALLOWED_HOSTS").split(" "))
+ALLOWED_HOSTS = DEFAULT_ALLOWED_HOSTS
 
 # CSRF COOKIES
 # CSRF_TRUSTED_ORIGINS = ["http://localhost:3000", "http://127.0.0.1:3000", "http://*"]
