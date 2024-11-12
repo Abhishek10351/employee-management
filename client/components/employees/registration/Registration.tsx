@@ -66,8 +66,7 @@ export default function Registration() {
     async function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
 
-        await api
-            .post("employees/", formData)
+        await api.post("employees/", formData)
             .then(() => {
                 toast({
                     title: "Registration Successful",
@@ -91,7 +90,7 @@ export default function Registration() {
                 if (e.response) {
                     const res = e.response;
                     const { data } = res;
-                    let message: any =
+                    let message: object| string =
                         data.name ||
                         data.email ||
                         data.phone ||

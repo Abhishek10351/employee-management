@@ -5,9 +5,9 @@
     "scripts": {
         "dev": "next dev",
         "build": "next build",
-        "start": "next start",
+        "start": "next start --port 2000",
         "lint": "next lint",
-        "serve": "npm run build && npm run start -p 2000"
+        "serve": "npm run build && npm run start --port 2000"
     },
     "dependencies": {
         "@chakra-ui/icons": "^2.2.4",
