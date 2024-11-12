@@ -4,6 +4,7 @@ import { config } from "dotenv";
 config();
 import Cookies from "js-cookie";
 let baseURL = "http://localhost:8000";
+
 baseURL = process.env.baseURL || baseURL;
 
 const settings = {

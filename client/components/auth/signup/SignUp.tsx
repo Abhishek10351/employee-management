@@ -71,26 +71,19 @@ export default function SignUp() {
             .catch((err) => {
                 setLoading(false);
                 if (err.response && err.response.data) {
-                    if (
-                        err.response.headers["content-type"].includes(
-                            "text/html",
-                        )
-                    ) {
-                        toast({
-                            title: "An error occurred. Please try again.",
-                            status: "error",
-                            duration: 3000,
-                            isClosable: true,
-                        });
-                        return;
-                    }
                     const data = err.response.data;
-                    const message =
+                    let message =
                         data.message ||
                         data.detail ||
                         data.email ||
                         data.password ||
                         data;
+                    if (Array.isArray(message)) {
+                        message = message[0];
+                    }
+                    if (typeof message === "object") {
+                        message = "An error occurred. Please try again later.";
+                    }
 
                     toast({
                         title: message,

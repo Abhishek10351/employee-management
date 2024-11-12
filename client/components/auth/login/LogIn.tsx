@@ -47,7 +47,10 @@ export default function Login() {
                 if (err.response) {
                     const res = err.response;
                     message = res.email || res.password || res.detail || res;
-                    if (typeof message === "object") {
+                    if (Array.isArray(message)) {
+                        message = message[0];
+                    }
+                    else if (typeof message === "object") {
                         message = "An error occurred. Please try again later.";
                     }
                 }

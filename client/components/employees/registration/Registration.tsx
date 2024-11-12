@@ -54,7 +54,7 @@ export default function Registration() {
     function handleChange(
         e: React.ChangeEvent<
             HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-        >,
+        >
     ) {
         const updatedFormData = {
             ...formData,
@@ -65,34 +65,66 @@ export default function Registration() {
 
     async function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
-        try {
-            await api.post("employees/", formData);
-            toast({
-                title: "Registration Successful",
-                description: "Employee has been registered successfully.",
-                status: "success",
-                duration: 3000,
-                isClosable: true,
+
+        await api
+            .post("employees/", formData)
+            .then(() => {
+                toast({
+                    title: "Registration Successful",
+                    description: "Employee has been registered successfully.",
+                    status: "success",
+                    duration: 3000,
+                    isClosable: true,
+                });
+                router.push("/employees");
+                setFormData({
+                    name: "",
+                    email: "",
+                    phone: "",
+                    department: "",
+                    position: "",
+                    salary: "",
+                    hire_date: "",
+                });
+            })
+            .catch((e) => {
+                if (e.response) {
+                    const res = e.response;
+                    const { data } = res;
+                    let message: any =
+                        data.name ||
+                        data.email ||
+                        data.phone ||
+                        data.department ||
+                        data.position ||
+                        data.salary ||
+                        data.hire_date ||
+                        data.detail ||
+                        data;
+                    if (Array.isArray(message)) {
+                        message = message[0];
+                    }
+                    if (typeof message === "object") {
+                        message = "An error occurred. Please try again later.";
+                    }
+                    toast({
+                        title: "Error",
+                        description: message,
+                        status: "error",
+                        duration: 3000,
+                        isClosable: true,
+                    });
+                    return;
+                }
+                toast({
+                    title: "Error",
+                    description:
+                        "Failed to register employee. Please try again.",
+                    status: "error",
+                    duration: 3000,
+                    isClosable: true,
+                });
             });
-            router.push("/employees");
-            setFormData({
-                name: "",
-                email: "",
-                phone: "",
-                department: "",
-                position: "",
-                salary: "",
-                hire_date: "",
-            });
-        } catch {
-            toast({
-                title: "Error",
-                description: "Failed to register employee. Please try again.",
-                status: "error",
-                duration: 3000,
-                isClosable: true,
-            });
-        }
     }
 
     function handleClear() {
