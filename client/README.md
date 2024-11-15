@@ -20,4 +20,4 @@ Check [INSTALL.md](./INSTALL.md) for install instructions
 ### Employees registration and view
 
 ![](./showcases/emp-register.png)
-![](./showcases/emp-view.png)
+![](./showcases/emp-table.png)
