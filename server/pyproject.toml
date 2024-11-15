@@ -2,7 +2,7 @@
 name = "server"
 version = "0.1.0"
 description = "A website to manage employees within an organisation"
-authors = ["Abhishek Kashyap <abhik5567@gmail.com>"]
+authors = ["Abhishek Kashyap <abhik5567@gmail.com>", "Subhrajit Talukdar <subhrajittalukdar411@gmail.com>"]
 license = "MIT"
 readme = "README.md"
 

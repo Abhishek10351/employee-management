@@ -6,6 +6,8 @@ This is the backend part of the project. It is built using Django and Django Res
 
 ## Installation
 
+(Prequisites - install python 3)
+
 1. Open the terminal and navigate to the server directory.
 2. Run the following command to install the required packages:
 
